@@ -59,7 +59,7 @@ class GetStartedScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  "Discover more than 1200 food recipes in your hands and cooking it easily!",
+                  "Discover food recipes in your hands and cooking it easily!",
                   style: Theme.of(context)
                       .textTheme
                       .bodyMedium

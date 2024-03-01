@@ -88,7 +88,7 @@ final trandingRecipes = [
   RecipeModel(
     name: "Chicken/Beef Karahi",
     image: "assets/karahi.jpg",
-    category: "Seafood",
+    category: "Chicken/Beef",
     duration: "1 Hour",
     serving: "Ingredients:"
    "500g chicken (cut into pieces)"
@@ -197,7 +197,7 @@ final latestRecipes = [
       "Enjoy your delicious Prawn Curry!",
   ),
   RecipeModel(
-    name: "Grilled Chicken Salad + Homemade Sweet Onion Dressing",
+    name: "Chicken Shashlik",
     image: "assets/shashlik.jpeg",
     category: "Chicken",
     duration: "1 Hour",
