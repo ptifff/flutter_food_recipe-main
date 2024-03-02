@@ -32,7 +32,7 @@ class AppRoute {
 
       case AppRouteName.login:
         return MaterialPageRoute(
-          builder: (_) => const LoginScreen(),
+          builder: (_) =>  LoginScreen(),
           settings: settings,
         );
 

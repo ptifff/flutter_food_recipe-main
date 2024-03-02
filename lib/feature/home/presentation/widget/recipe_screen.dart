@@ -122,7 +122,7 @@ class _ShoppingListState extends State<ShoppingList> {
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: Colors.black,
                   ),
                 ),
                 SizedBox(height: 20),

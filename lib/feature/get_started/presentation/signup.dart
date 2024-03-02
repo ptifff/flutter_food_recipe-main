@@ -4,6 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'login.dart';
 
 class SignUp extends StatelessWidget {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,13 +20,9 @@ class SignUp extends StatelessWidget {
           ),
           SingleChildScrollView(
             child: Center(
-
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-
                 children: [
-                  // Your existing UI widgets
-
                   Padding(
                     padding: const EdgeInsets.only(top: 150.0),
                     child: Text(
@@ -35,125 +33,150 @@ class SignUp extends StatelessWidget {
                       ),
                     ),
                   ),
-                  // Social icons
                   // Signup Form
                   Padding(
                     padding: const EdgeInsets.all(20.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "First Name*",
-                          style: GoogleFonts.alata(
-                            fontSize: 12,
-                            color: Colors.white,
-                          ),
-                        ),
-                        TextFormField(
-                          style: TextStyle(color: Colors.black),
-                          decoration: InputDecoration(
-                            filled: true,
-                            fillColor: Colors.white,
-                            border: OutlineInputBorder(),
-                            hintText: 'Enter your first name',
-                          ),
-                        ),
-                        SizedBox(height: 20),
-                        Text(
-                          "Email ID*",
-                          style: GoogleFonts.alata(
-                            fontSize: 12,
-                            color: Colors.white,
-                          ),
-                        ),
-                        TextFormField(
-                          style: TextStyle(color: Colors.black),
-                          decoration: InputDecoration(
-                            filled: true,
-                            fillColor: Colors.white,
-                            border: OutlineInputBorder(),
-                            hintText: 'Enter your email',
-                          ),
-                        ),
-                        SizedBox(height: 20),
-                        Text(
-                          "Password*",
-                          style: GoogleFonts.alata(
-                            fontSize: 12,
-                            color: Colors.white,
-                          ),
-                        ),
-                        TextFormField(
-                          obscureText: true,
-                          style: TextStyle(color: Colors.black),
-                          decoration: InputDecoration(
-                            filled: true,
-                            fillColor: Colors.white,
-                            border: OutlineInputBorder(),
-                            hintText: 'Enter your password',
-                          ),
-                        ),
-                        SizedBox(height: 20),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(builder: (_) => LoginScreen()),
-                                  );
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  primary: Colors.teal,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(3),
-                                    side: BorderSide(width: 1, color: Colors.teal),
-                                  ),
-                                ),
-                                child: Text(
-                                  'LOGIN',
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              ),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "First Name*",
+                            style: GoogleFonts.alata(
+                              fontSize: 12,
+                              color: Colors.white,
                             ),
-                            SizedBox(width: 10),
-                            Expanded(
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  String password = generatePassword(8, true, true, true); // Example: 8 characters, include numbers, letters, and special characters
-                                  showDialog(
-                                    context: context,
-                                    builder: (_) => AlertDialog(
-                                      title: Text("Generated Password"),
-                                      content: Text(password),
-                                      actions: [
-                                        TextButton(
-                                          onPressed: () {
-                                            Navigator.pop(context);
-                                          },
-                                          child: Text("OK"),
-                                        ),
-                                      ],
+                          ),
+                          TextFormField(
+                            style: TextStyle(color: Colors.black),
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.white,
+                              border: OutlineInputBorder(),
+                              hintText: 'Enter your first name',
+                              prefixIcon: Icon(Icons.person),
+                            ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter your first name';
+                              }
+                              return null;
+                            },
+                          ),
+                          SizedBox(height: 20),
+                          Text(
+                            "Email ID*",
+                            style: GoogleFonts.alata(
+                              fontSize: 12,
+                              color: Colors.white,
+                            ),
+                          ),
+                          TextFormField(
+                            style: TextStyle(color: Colors.black),
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.white,
+                              border: OutlineInputBorder(),
+                              hintText: 'Enter your email',
+                              prefixIcon: Icon(Icons.email),
+                            ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter your email';
+                              }
+                              return null;
+                            },
+                          ),
+                          SizedBox(height: 20),
+                          Text(
+                            "Password*",
+                            style: GoogleFonts.alata(
+                              fontSize: 12,
+                              color: Colors.white,
+                            ),
+                          ),
+                          TextFormField(
+                            obscureText: true,
+                            style: TextStyle(color: Colors.black),
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.white,
+                              border: OutlineInputBorder(),
+                              hintText: 'Enter your password',
+                              prefixIcon: Icon(Icons.lock),
+                            ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter your password';
+                              }
+                              return null;
+                            },
+                          ),
+                          SizedBox(height: 20),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    if (_formKey.currentState!.validate()) {
+                                      Navigator.of(context).pushReplacement(
+                                        MaterialPageRoute(builder: (_) => LoginScreen()),
+                                      );
+                                    }
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    primary: Colors.teal,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(3),
+                                      side: BorderSide(width: 1, color: Colors.teal),
                                     ),
-                                  );
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  primary: Colors.teal,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(3),
-                                    side: BorderSide(width: 1, color: Colors.teal),
+                                  ),
+                                  child: Text(
+                                    'LOGIN',
+                                    style: TextStyle(color: Colors.white),
                                   ),
                                 ),
-                                child: Text(
-                                  'GENERATE',
-                                  style: TextStyle(color: Colors.white),
+                              ),
+                              SizedBox(width: 10),
+                              Expanded(
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    String password = generatePassword(8, true, true, true);
+                                    showDialog(
+                                      context: context,
+                                      builder: (_) => AlertDialog(
+                                        title: Text("Generated Password"),
+                                        content: Text(password),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            child: Text("OK"),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    primary: Colors.teal,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(3),
+                                      side: BorderSide(width: 1, color: Colors.teal),
+                                    ),
+                                  ),
+                                  child: Text(
+                                    'GENERATE',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                      ],
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   SizedBox(height: 8),
@@ -170,37 +193,6 @@ class SignUp extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-class PasswordField extends StatefulWidget {
-  const PasswordField({Key? key}) : super(key: key);
-
-  @override
-  _PasswordFieldState createState() => _PasswordFieldState();
-}
-
-class _PasswordFieldState extends State<PasswordField> {
-  bool _isObscure = true;
-
-  @override
-  Widget build(BuildContext context) {
-    return TextFormField(
-      decoration: InputDecoration(
-        border: OutlineInputBorder(),
-        suffixIcon: GestureDetector(
-          onTap: () {
-            setState(() {
-              _isObscure = !_isObscure;
-            });
-          },
-          child: Icon(
-            _isObscure ? Icons.visibility : Icons.visibility_off,
-          ),
-        ),
-      ),
-      obscureText: _isObscure,
     );
   }
 }
